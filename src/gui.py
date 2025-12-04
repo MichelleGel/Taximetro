@@ -4,9 +4,9 @@ import time
 import os
 import logging
 from datetime import datetime
-from history import save_history, read_history
+from history import save_history, read_history 
 from config import fare_config
-from taximeter import calculate_time_fare, calculate_distance_fare, get_distance
+from taximeter import calculate_time_fare, calculate_distance_fare
 
 # =========================
 # Configuración de logging
@@ -99,7 +99,9 @@ def finish_trip():
         "Fin del viaje, resumen",
         f"Tiempo parado: {stopped_time:.2f} s\n"
         f"Tiempo en movimiento: {moving_time:.2f} s\n"
-        f"Total a pagar: {total_fare:.2f} €")
+        f"Total a pagar: {total_fare:.2f} €"
+    )
+    # Guardar en historial
     trip_info = {
         'fecha': datetime.now(),
         'tipo': 'tiempo',
@@ -123,7 +125,7 @@ def start_distance_trip():
         return
     total_fare = calculate_distance_fare(distance)
     messagebox.showinfo(
-        "Fin del viaje por distancia, resumen",
+        "Fin del viaje por distancia, resumen: ",
         f"Distancia: {distance:.2f} km\nTotal a pagar: {total_fare:.2f} €"
     )
     trip_info = {
@@ -149,12 +151,16 @@ def reset_time_trip():
 def update_labels():
     stopped_label.configure(text=f"Tiempo parado: {stopped_time:.2f} s")
     moving_label.configure(text=f"Tiempo en movimiento: {moving_time:.2f} s")
-    fare_label.configure(text=f"Tarifa actual: {calculate_time_fare(stopped_time, moving_time):.2f} €" if trip_active else "Tarifa actual: 0.00 €")
+    fare_label.configure(
+        text=f"Tarifa actual: {calculate_time_fare(stopped_time, moving_time):.2f} €"
+        if trip_active else "Tarifa actual: 0.00 €"
+    )
 
 def update_distance_fare(event=None):
     try:
         distance = float(distance_entry.get())
-        fare_distance_label.configure(text=f"Tarifa actual: {calculate_distance_fare(distance):.2f} €")
+        fare = calculate_distance_fare(distance)
+        fare_distance_label.configure(text=f"Tarifa actual: {fare:.2f} €")
     except ValueError:
         fare_distance_label.configure(text="Tarifa actual: 0.00 €")
 
@@ -169,11 +175,22 @@ def update_time_labels():
         fare_label.configure(text=f"Tarifa actual: {calculate_time_fare(current_stopped, current_moving):.2f} €")
     root.after(1000, update_time_labels)
 
+# =========================
+# Función para mostrar historial con estética CustomTkinter
+# =========================
 def show_history():
     hist_window = ctk.CTkToplevel()
     hist_window.title("Historial de viajes")
-    st = scrolledtext.ScrolledText(hist_window, width=60, height=30)
-    st.pack(padx=10, pady=10)
+    hist_window.geometry("500x500")
+    
+    title_label = ctk.CTkLabel(hist_window, text="Historial de Viajes", font=("Arial", 16, "bold"))
+    title_label.pack(pady=10)
+    
+    frame_scroll = ctk.CTkFrame(hist_window)
+    frame_scroll.pack(fill="both", expand=True, padx=10, pady=10)
+    
+    st = scrolledtext.ScrolledText(frame_scroll, width=60, height=25, font=("Consolas", 11), bg="#2B2B2B", fg="white", insertbackground="white")
+    st.pack(fill="both", expand=True)
     st.insert(ctk.END, read_history())
     st.configure(state='disabled')
 
@@ -185,7 +202,7 @@ ctk.set_default_color_theme("blue")
 
 root = ctk.CTk()
 root.title("Taxímetro GUI")
-root.geometry("550x600")
+root.geometry("500x550")
 
 # Bienvenida
 welcome_label = ctk.CTkLabel(root, text="¡Bienvenido al Taxímetro!\nElige una opción para comenzar.", font=("Arial", 16, "bold"))
@@ -225,11 +242,11 @@ fare_distance_label.pack()
 distance_button = ctk.CTkButton(root, text="Calcular Tarifa por Distancia", command=start_distance_trip, fg_color="#9C27B0")
 distance_button.pack(pady=5)
 
-# Historial
+# Botón historial
 history_button = ctk.CTkButton(root, text="Ver historial", command=show_history, fg_color="#795548")
 history_button.pack(pady=5)
 
-# Salir
+# Botón salir
 exit_button = ctk.CTkButton(root, text="Salir", command=root.quit, fg_color="#607D8B")
 exit_button.pack(pady=10)
 
