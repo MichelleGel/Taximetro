@@ -30,6 +30,8 @@ def calculate_time_fare(seconds_stopped, seconds_moving):
     stopped: 0.02€/s
     moving: 0.05€/s
     '''
+    if seconds_stopped < 0 or seconds_moving < 0:
+        raise ValueError("Los tiempos no pueden ser negativos")
     fare = (seconds_stopped * config['stopped_fare']) + (seconds_moving * config['moving_fare'])
     #print(lang["total_fare"].format(fare=fare))
     return fare
@@ -38,6 +40,8 @@ def calculate_distance_fare(distance):
     '''
     funcion para calcular la tarifa usando distancia.
     '''
+    if distance <= 0:
+        raise ValueError("La distancia debe ser mayor que 0")
     fare = config['base_fare'] + distance * config['price_per_km']
     #print(lang["total_fare"].format(fare=fare))
     return fare
