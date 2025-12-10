@@ -3,10 +3,12 @@
 Proyecto Educativo en el que se desarrolla un prototipo de taxímetro digital utilizando Python. 
 
 ## ☑️Demo CLI
-
+A continuación se muestra una visualización rapida real del Programa en CLI.
+![Vista previa del Programa CLI](/src/assets/democli.gif)
 
 ## ☑️Demo GUI
-
+A continuación se muestra una visualización rapida real del Programa GUI.
+![Vista previa del Programa GUI](/src/assets/demogui.gif)
 
 ## 🎯Objetivos Alcanzados del Proyecto
 
