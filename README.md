@@ -54,6 +54,10 @@ taximetro/
 │   └── languages/
 │       └── en.py           # Diccionario para Ingles
 │       └── es.py           # Diccionario para Español
+│   └── assets/             # Imagenes
+│       └── democli.gif           
+│       └── demogui.gif   
+│       └── fondotaxi.gif      
 │
 ├── data/
 │   └── historial.txt       # Historial persistente de viajes en texto plano (archivo autogenerado)
