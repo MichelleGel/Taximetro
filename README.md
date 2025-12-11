@@ -29,6 +29,7 @@ A continuación se muestra una visualización rapida real del Programa GUI.
  - Pytest
  - logging (módulo nativo) 
  - venv 
+ - PyQt5
 
 ## 🔗 Control de Versiones
 
@@ -192,6 +193,7 @@ Los tests implementados se encuentran en `src/tests/test_fare.py`.
  #### g) Test de tipo inválido (_`test_invalid_type`_)
 - Comprueba que se lancen errores cuando se pasan tipos de datos incorrectos (strings en vez de números).
 
+![Vista previa de Tests](src/assets/vistatests.jpeg)
 
 ## ▶️Ejecución del proyecto
 
