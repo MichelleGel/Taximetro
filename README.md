@@ -22,9 +22,7 @@ A continuación se muestra una visualización rapida real del Programa GUI.
 
 ## 🛠️ Tecnologías Utilizadas
 
- - Python 3
- - customtkinter 
- - Tkinter 
+ - Python 3 
  - python-dotenv
  - Pytest
  - logging (módulo nativo) 
@@ -58,7 +56,8 @@ taximetro/
 │   └── assets/             # Imagenes
 │       └── democli.gif           
 │       └── demogui.gif   
-│       └── fondotaxi.gif      
+│       └── fondotaxi.gif 
+│       └── vistatests.jpeg     
 │
 ├── data/
 │   └── historial.txt       # Historial persistente de viajes en texto plano (archivo autogenerado)
@@ -224,6 +223,6 @@ pytest -v
 ```
 
 ---
-##### 👤Desarrollado por Michelle Gelves
+##### 👤Desarrollado por Michelle Gelves 
 
 
