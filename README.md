@@ -35,6 +35,9 @@ A continuación se muestra una visualización rapida real del Programa GUI.
 - Issues  
 - Pull requests 
 
+Versionado mediante ramas:
+![alt text](src/assets/rama.png)
+
 [Taxímetro Project](https://github.com/users/MichelleGel/projects/2)
 
 
